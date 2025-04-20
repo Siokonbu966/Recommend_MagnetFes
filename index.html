@@ -15,11 +15,15 @@
         </nav>
     </header>
 
-    <div class="container pt-5">
-        <h1>🧲あなたのことを教えてください。🧲</h1>
+    <div class="d-flex justify-content-center">
+        <div class="col-auto">
+            <div class="container pt-3">
+            <h1 class="text-center">🧲あなたのことを教えてください。🧲</h1>
+            </div>
+        </div>
     </div>
-
-    <div class="row">
+    
+    <div class="d-flex justify-content-center">
         <div class="col-sm-9 col-lg-6">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">名前</span>
@@ -28,6 +32,7 @@
         </div>
     </div>
 
+    <!--
     <div class="row">
         <div class="col-sm-9 col-lg-6">
             <div class="input-group mb-3">
@@ -41,11 +46,25 @@
             </div>
         </div>
     </div>
-        
+    -->
 
-                <button class="btn btn-primary" id="assessment">診断する</button>
+    <div class="d-flex justify-content-center">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="online" id="radio_online" value="online">
+            <label class="form-check-label" for="radio_online">
+                オンライン
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="online" id="radio_offline" value="offline">
+            <label class="form-check-label" for="radio_offline">
+                オフライン
+            </label>
+        </div>
+    </div>
 
-
-        </form>
+    <div class="d-flex justify-content-center">
+        <button class="btn btn-primary" id="assessment">診断する</button>
+    </div>
 </body>
 </html>
