@@ -3,7 +3,7 @@
 const result_button = document.getElementById('result_button');
 
 function drawOmikuji() {
-  console.log('おみくじを引く関数が呼び出されました。');
+  console.log('debug: おみくじを引く関数が呼び出されました。');
   /**
    * オンライン企画の結果を表示する変数
    * @type {Array[]} online_results - オンライン企画の配列
@@ -34,8 +34,8 @@ function drawOmikuji() {
   const result_plan_offline = offline_plan[randomIndex];
   const result_url_offline = offline_urls[randomIndex];
 
-  console.log('オンライン企画の結果:', result_plan_online);
-  console.log('オンライン企画のURL:', result_url_online);
+  console.log('debug: オンライン企画の結果:', result_plan_online);
+  console.log('debug: オンライン企画のURL:', result_url_online);
   displayResult_online(result_plan_online, result_url_online); // 結果を表示する関数を呼び出す
 }
 
@@ -43,7 +43,7 @@ function displayResult_online(a, b) {
   // 結果を表示する要素を取得
   const online_result_planElement = document.getElementById('result_plan_area');
   const online_result_urlElement = document.getElementById('result_link_area');
-  console.log('test');
+  console.log('debug: displayResult_online');
   // 結果を表示
   
   online_result_planElement.textContent = 'あなたにおすすめの企画は「' + a + '」です！';
