@@ -28,6 +28,16 @@ function drawOmikuji() {
    */
   const offline_urls = ['https://nnn.ed.jp/school_festival/plan/#ex-83vv-rm3nx5i', 'https://nnn.ed.jp/school_festival/plan/#ex-rcj_q2stvjxw', 'https://nnn.ed.jp/school_festival/plan/#ex-fc_e-ie9j', 'https://nnn.ed.jp/school_festival/plan/#ex-v-c9454f9', 'https://nnn.ed.jp/school_festival/plan/#ex-tc_aezklz7h', 'https://nnn.ed.jp/school_festival/plan/#ex-h6d_tocovr'];
 
+  /**
+   * @type {string} user - ユーザー名を取得
+   */
+  let user = document.getElementById('name').value;
+  console.log('debug: ユーザー名:', user);
+  if (!user) {
+    user = '山田太郎'; // デフォルトのユーザー名
+  }
+
+  // ランダムなインデックスを生成
   const randomIndex = Math.floor(Math.random() * online_plan.length);
   const result_plan_online = online_plan[randomIndex];
   const result_url_online = online_urls[randomIndex];
@@ -36,22 +46,21 @@ function drawOmikuji() {
 
   console.log('debug: オンライン企画の結果:', result_plan_online);
   console.log('debug: オンライン企画のURL:', result_url_online);
-  displayResult_online(result_plan_online, result_url_online); // 結果を表示する関数を呼び出す
+  displayResult_online(user, result_plan_online, result_url_online  ); // 結果を表示する関数を呼び出す
 }
 
-function displayResult_online(a, b) {
+function displayResult_online(user, result_plan, result_url) {
   // 結果を表示する要素を取得
-  const online_result_planElement = document.getElementById('result_plan_area');
-  const online_result_urlElement = document.getElementById('result_link_area');
-  console.log('debug: displayResult_online');
-  // 結果を表示
-  
-  online_result_planElement.textContent = 'あなたにおすすめの企画は「' + a + '」です！';
-  online_result_urlElement.textContent = 'URL: ' + b;
+  const online_result_planElement = document.getElementById('result_plan');
+  const online_result_urlElement = document.getElementById('result_link');
   if (online_result_planElement && online_result_urlElement) {
+    console.log(`debug: ユーザー: ${user}`);
+    console.log(`debug: 結果: ${result_plan}`);
+    console.log(`debug: URL: ${result_url}`);
     // 結果を表示
-    // online_result_planElement.textContent = 'あなたにおすすめの企画は「' + result_plan_online + '」です！';
-    // online_result_urlElement.textContent = 'URL: ' + result_url_online;
+    online_result_planElement.textContent = `${ user }さんにおすすめの企画は「${ result_plan }」です！`;
+    online_result_urlElement.textContent = `URL: ${ result_url }`;
+    // showResult(); // 結果を表示する関数を呼び出す
   } else {
     console.error('Error: 要素 "result" が見つかりません。');
   }
@@ -61,9 +70,13 @@ document.addEventListener('DOMContentLoaded', () => {
   result_button.addEventListener('click', () => {
     console.log('ボタンがクリックされました。');
     drawOmikuji(); // おみくじを引く関数を呼び出す
+    showResult(); // 結果を表示する関数を呼び出す
   });
 });
 
+function showResult() {
+  document.getElementById("result-area").style.display = "block";
+}
 // 必要に応じて、ページ読み込み時などに初期化処理を追加できます
 // 例：
 // document.addEventListener('DOMContentLoaded', () => {
