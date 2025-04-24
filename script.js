@@ -2,7 +2,7 @@
 
 const result_button = document.getElementById('result_button');
 
-function drawOmikuji() {
+function drawPlan() {
   console.log('debug: おみくじを引く関数が呼び出されました。');
   /**
    * オンライン企画の結果を表示する変数
@@ -64,18 +64,19 @@ function drawOmikuji() {
   }
 }
 
+// 結果を表示する関数
 function displayResult(user, result_plan, result_url) {
   // 結果を表示する要素を取得
-  const online_result_planElement = document.getElementById('result_plan');
-  const online_result_urlElement = document.getElementById('result_link');
-  if (online_result_planElement && online_result_urlElement) {
+  const result_planElement = document.getElementById('result_plan');
+  const result_urlElement = document.getElementById('result_link');
+  if (result_planElement && result_urlElement) {
     console.log(`debug: ユーザー: ${user}`);
     console.log(`debug: 結果: ${result_plan}`);
     console.log(`debug: URL: ${result_url}`);
     // 結果を表示
-    online_result_planElement.textContent = `${ user }さんにおすすめの企画は「${ result_plan }」です！`;
-    online_result_urlElement.textContent = `URL: ${ result_url }`;
-    // showResult(); // 結果を表示する関数を呼び出す
+    result_planElement.textContent = `${ user }さんにおすすめの企画は「${ result_plan }」です！`;
+    result_urlElement.textContent = `URL: ${ result_url }`;
+    document.getElementById("result-area").style.display = "block";
   } else {
     console.error('Error: 要素 "result" が見つかりません。');
   }
@@ -84,11 +85,6 @@ function displayResult(user, result_plan, result_url) {
 document.addEventListener('DOMContentLoaded', () => {
   result_button.addEventListener('click', () => {
     console.log('ボタンがクリックされました。');
-    drawOmikuji(); // おみくじを引く関数を呼び出す
-    showResult(); // 結果を表示する関数を呼び出す
+    drawPlan(); 
   });
 });
-
-function showResult() {
-  document.getElementById("result-area").style.display = "block";
-}
