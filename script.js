@@ -37,8 +37,15 @@ function drawOmikuji() {
     user = '山田太郎'; // デフォルトのユーザー名
   }
 
+  /**
+   * @type {boolean} isOnline - オンライン企画かオフライン企画かを判定
+   */
+  const isOnline = document.getElementById('radio_online').checked;
+
   // ランダムなインデックスを生成
   const randomIndex = Math.floor(Math.random() * online_plan.length);
+
+  // ランダムな企画とURLを取得
   const result_plan_online = online_plan[randomIndex];
   const result_url_online = online_urls[randomIndex];
   const result_plan_offline = offline_plan[randomIndex];
@@ -46,10 +53,18 @@ function drawOmikuji() {
 
   console.log('debug: オンライン企画の結果:', result_plan_online);
   console.log('debug: オンライン企画のURL:', result_url_online);
-  displayResult_online(user, result_plan_online, result_url_online  ); // 結果を表示する関数を呼び出す
+
+  // オンライン企画かの判定
+  if (isOnline) {
+    console.log('debug: オンライン企画が選択されました。');
+    displayResult(user, result_plan_online, result_url_online); // 結果を表示する関数を呼び出す
+  } else {
+    console.log('debug: オフライン企画が選択されました。');
+    displayResult(user, result_plan_offline, result_url_offline); // 結果を表示する関数を呼び出す
+  }
 }
 
-function displayResult_online(user, result_plan, result_url) {
+function displayResult(user, result_plan, result_url) {
   // 結果を表示する要素を取得
   const online_result_planElement = document.getElementById('result_plan');
   const online_result_urlElement = document.getElementById('result_link');
@@ -77,13 +92,3 @@ document.addEventListener('DOMContentLoaded', () => {
 function showResult() {
   document.getElementById("result-area").style.display = "block";
 }
-// 必要に応じて、ページ読み込み時などに初期化処理を追加できます
-// 例：
-// document.addEventListener('DOMContentLoaded', () => {
-//   const button = document.getElementById('omikujiButton');
-//   if (button) {
-//     button.addEventListener('click', drawOmikuji);
-//   } else {
-//     console.error('Error: 要素 'omikujiButton' が見つかりません。');
-//   }
-// });
