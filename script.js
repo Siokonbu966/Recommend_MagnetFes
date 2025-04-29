@@ -88,6 +88,7 @@ function displayResult(user, result_plan, result_url, isOnline) {
     anchor.setAttribute('href', share_url);
     anchor.setAttribute('class', 'twitter-hashtag-button');
     anchor.setAttribute('data-text', share_result);
+    anchor.setAttribute('data-size', 'large');
     anchor.innerText = 'Tweet #磁石祭ZERO';
 
     tweetDivision.appendChild(anchor);
@@ -101,7 +102,7 @@ function displayResult(user, result_plan, result_url, isOnline) {
     // 結果を表示
     result_planElement.innerHTML = result;
     //result_urlElement.textContent = `URL: ${ result_url }`;
-    result_urlElement.innerHTML = `<a href="${ result_url }" target="_blank" class="btn btn-primary px-5 py-3 m-2">企画の詳細はこちら</a>`;
+    result_urlElement.innerHTML = `<a href="${ result_url }" target="_blank" class="btn btn-primary px-5 py-3 m-2"><i class="fas fa-external-link-alt"></i>企画の詳細はこちら</a>`;
     document.getElementById("result-area").style.display = "block";
   } else {
     console.error('Error: 要素 "result" が見つかりません。');
