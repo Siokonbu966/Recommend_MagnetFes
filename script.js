@@ -57,15 +57,15 @@ function drawPlan() {
   // オンライン企画かの判定
   if (isOnline) {
     console.log('debug: オンライン企画が選択されました。');
-    displayResult(user, result_plan_online, result_url_online); // 結果を表示する関数を呼び出す
+    displayResult(user, result_plan_online, result_url_online, isOnline); // 結果を表示する関数を呼び出す
   } else {
     console.log('debug: オフライン企画が選択されました。');
-    displayResult(user, result_plan_offline, result_url_offline); // 結果を表示する関数を呼び出す
+    displayResult(user, result_plan_offline, result_url_offline, isOnline); // 結果を表示する関数を呼び出す
   }
 }
 
 // 結果を表示する関数
-function displayResult(user, result_plan, result_url) {
+function displayResult(user, result_plan, result_url, isOnline) {
   // 結果を表示する要素を取得
   const result_planElement = document.getElementById('result_plan');
   const result_urlElement = document.getElementById('result_link');
@@ -74,8 +74,13 @@ function displayResult(user, result_plan, result_url) {
     console.log(`debug: 結果: ${result_plan}`);
     console.log(`debug: URL: ${result_url}`);
     // 結果を表示
-    result_planElement.textContent = `${ user }さんにおすすめの企画は「${ result_plan }」です！`;
-    result_urlElement.textContent = `URL: ${ result_url }`;
+    if (isOnline) {
+      result_planElement.innerHTML = `${ user }さんにおすすめの企画は<span class="fw-bold mag25_blue_text"> ${ result_plan } </span>です！`;
+    } else {
+      result_planElement.innerHTML = `${ user }さんにおすすめの企画は<span class="fw-bold mag25_red_text"> ${ result_plan } </span>です！`;
+    }
+    //result_urlElement.textContent = `URL: ${ result_url }`;
+    result_urlElement.innerHTML = `<a href="${ result_url }" target="_blank" class="btn btn-primary px-5 py-3 m-2">企画の詳細はこちら</a>`;
     document.getElementById("result-area").style.display = "block";
   } else {
     console.error('Error: 要素 "result" が見つかりません。');
