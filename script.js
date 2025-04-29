@@ -3,7 +3,7 @@
 const result_button = document.getElementById('result_button');
 
 function drawPlan() {
-  console.log('debug: おみくじを引く関数が呼び出されました。');
+  console.log('debug: 企画をおすすめする関数が呼び出されました。');
   /**
    * オンライン企画の結果を表示する変数
    * @type {Array[]} online_results - オンライン企画の配列
@@ -53,6 +53,8 @@ function drawPlan() {
 
   console.log('debug: オンライン企画の結果:', result_plan_online);
   console.log('debug: オンライン企画のURL:', result_url_online);
+  console.log('debug: オフライン企画の結果:', result_plan_offline);
+  console.log('debug: オフライン企画のURL:', result_url_offline);
 
   // オンライン企画かの判定
   if (isOnline) {
@@ -75,9 +77,8 @@ function displayResult(user, result_plan, result_url, isOnline) {
     // console.log(`debug: 結果: ${result_plan}`);
     // console.log(`debug: URL: ${result_url}`);
 
-    const result = `${ user }さんにおすすめの企画は「<span class="fw-bold mag25_blue_text"> ${ result_plan } </span>」です！`;
+    // tweetの要素
     const share_result = `${ user }さんにおすすめの企画は「${ result_plan }」です！`;
-
     const tweetDivision = document.getElementById('tweet_area');
     tweetDivision.innerText = '';
     const anchor = document.createElement('a');
@@ -90,7 +91,6 @@ function displayResult(user, result_plan, result_url, isOnline) {
     anchor.setAttribute('data-text', share_result);
     anchor.setAttribute('data-size', 'large');
     anchor.innerText = 'Tweet #磁石祭ZERO';
-
     tweetDivision.appendChild(anchor);
 
     const script = document.createElement('script');
@@ -100,8 +100,11 @@ function displayResult(user, result_plan, result_url, isOnline) {
     console.log('debug: Twitterシェアボタンがクリックされました。');
 
     // 結果を表示
-    result_planElement.innerHTML = result;
-    //result_urlElement.textContent = `URL: ${ result_url }`;
+    if (isOnline) {
+      result_planElement.innerHTML = `${ user }さんにおすすめの企画は<span class="fw-bold mag25_blue_text">「 ${ result_plan } 」</span>です！`;
+    } else {
+      result_planElement.innerHTML = `${ user }さんにおすすめの企画は<span class="fw-bold mag25_red_text">「 ${ result_plan } 」</span>です！`;
+    }
     result_urlElement.innerHTML = `<a href="${ result_url }" target="_blank" class="btn btn-primary px-5 py-3 m-2"><i class="fas fa-external-link-alt"></i>企画の詳細はこちら</a>`;
     document.getElementById("result-area").style.display = "block";
   } else {
