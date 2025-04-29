@@ -70,15 +70,36 @@ function displayResult(user, result_plan, result_url, isOnline) {
   const result_planElement = document.getElementById('result_plan');
   const result_urlElement = document.getElementById('result_link');
   if (result_planElement && result_urlElement) {
-    console.log(`debug: ユーザー: ${user}`);
-    console.log(`debug: 結果: ${result_plan}`);
-    console.log(`debug: URL: ${result_url}`);
+    // debug
+    // console.log(`debug: ユーザー: ${user}`);
+    // console.log(`debug: 結果: ${result_plan}`);
+    // console.log(`debug: URL: ${result_url}`);
+
+    const result = `${ user }さんにおすすめの企画は「<span class="fw-bold mag25_blue_text"> ${ result_plan } </span>」です！`;
+    const share_result = `${ user }さんにおすすめの企画は「${ result_plan }」です！`;
+
+    const tweetDivision = document.getElementById('tweet_area');
+    tweetDivision.innerText = '';
+    const anchor = document.createElement('a');
+    const pageUrl =  encodeURIComponent(window.location.href);
+    const text = encodeURIComponent(share_result);
+    const share_url = `https://twitter.com/intent/tweet?text=${ text }&url=${ pageUrl }&button_hashtag=磁石祭ZERO`;
+
+    anchor.setAttribute('href', share_url);
+    anchor.setAttribute('class', 'twitter-hashtag-button');
+    anchor.setAttribute('data-text', share_result);
+    anchor.innerText = 'Tweet #磁石祭ZERO';
+
+    tweetDivision.appendChild(anchor);
+
+    const script = document.createElement('script');
+    script.setAttribute('src', 'https://platform.twitter.com/widgets.js');
+    tweetDivision.appendChild(script);
+    // debug
+    console.log('debug: Twitterシェアボタンがクリックされました。');
+
     // 結果を表示
-    if (isOnline) {
-      result_planElement.innerHTML = `${ user }さんにおすすめの企画は<span class="fw-bold mag25_blue_text"> ${ result_plan } </span>です！`;
-    } else {
-      result_planElement.innerHTML = `${ user }さんにおすすめの企画は<span class="fw-bold mag25_red_text"> ${ result_plan } </span>です！`;
-    }
+    result_planElement.innerHTML = result;
     //result_urlElement.textContent = `URL: ${ result_url }`;
     result_urlElement.innerHTML = `<a href="${ result_url }" target="_blank" class="btn btn-primary px-5 py-3 m-2">企画の詳細はこちら</a>`;
     document.getElementById("result-area").style.display = "block";
